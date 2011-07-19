@@ -43,12 +43,12 @@ echo "60%" && \
 sleep 2
 #_________________________________________________________
 echo "$MessageCloneRepo" && \
-git clone git://github.com/osarena/Linux-Apps.git #Λήψη αποθετηρίου
+git clone git://github.com/osarena/Ubuntu-Apps.git     #Λήψη αποθετηρίου
 echo "80%" && \
 sleep 2
 #_________________________________________________________
 echo "$MessageMakeBinUpdate" && \
-chmod 775 Linux-Apps/update-repo                         #Δημιουργία εκτελέσιμου update-repo
+chmod 775 Ubuntu-Apps/update-repo                         #Δημιουργία εκτελέσιμου update-repo
 sleep 2
 #_________________________________________________________
 echo "$MessageCompleteRepo" && \
