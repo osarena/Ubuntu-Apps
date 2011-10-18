@@ -1,0 +1,84 @@
+#!/bin/bash
+#______________________________________________________________________________________________________
+#Name   : uCodecsPack
+#Licence: GPL3 (http://www.gnu.org/licenses/gpl.html), FFmepeg and Zenity have their receptive licence, please see their man page
+#Author : Salih Emin (Based on the original code 'Envied Ubuntu Multimedia Installer 2.2' http://gnome-look.org/content/show.php/Envied+Multimedia+GUI+Installer?content=129011)
+#Email  : salihemin (at) osarenat.net 
+#Date   : 18-10-2011
+#Version: Alpha 1.0
+#System : Ubuntu (10.04 and above)
+#WebSite: http://www.cerebrux.net - http://www.osarena.net/author/salih-emin
+#Source Code: Everything below comments is the sourcecode :)
+#Description:
+#Codecs installer for ubuntu
+#-Java Support
+#-Flash Player Plugin
+#-Gstreamer Codecs
+#-w32codecs/w64codecs(ανάλογα με την αρχητεκτονική)
+#-Non-free extra codecs
+#-ffmpeg
+#-Vlc media player
+#-libdvdcss2 DVD codecs
+#______________________________________________________________________________________________________
+
+#
+          
+zenity --info --width=400 --title='uCodecsPack Ubuntu Multimedia Installer' \
+          --text="Η εφαρμογή χρησιμοποείται για\nτην εγκατάσταση πολυμεσικής υποστήρηξης\nσε Ubuntu 10.04 έως και Ubuntu 11.04\n\nΓια λεπτομέρειες διαβάστε τις Οδηγίες Χρήσης"
+# =============================================================================================================
+
+sudo -K
+while true; do
+
+while [ -z "$PASS" ]; do 
+if ! PASS=$(zenity --entry --title="Έλεγχος Διαχειρηστή" --width=350 --hide-text --text="Πληκτρολογήστε τον κωδικό σας" ) ; then 
+   FAIL="YES"
+fi
+done
+
+echo "$PASS" | sudo -S -p "" /bin/true 2> "/dev/null" 
+
+if [ "$?" = "1" ]; then 
+   FAIL="YES"
+   $DISPLAYSTATUS
+   PASS=""
+else
+   $DISPLAYSTATUS
+   break
+fi
+
+done
+
+# =============================================================================================================
+ANS=$(zenity --title='uCodecsPack'  --list  --text "Επιλέξτε την έκδοση του Ubuntu που διαθέτετε" --radiolist --height=280 --width=350 --column "Επιλογή" --column "Έκδοση/Αρχιτεκτονική" TRUE '10.04/i386' FALSE '10.04/amd64' FALSE '10.10/i386' FALSE '10.10/amd64' FALSE '11.04/i386' FALSE '11.04/amd64'); echo $ans
+ if [ "$ANS" = "10.04/i386" ]; then
+   echo "$PASS" | sudo -S -p "" echo deb http://packages.medibuntu.org/ lucid free non-free | sudo tee -a /etc/apt/sources.list && echo deb-src http://packages.medibuntu.org/ lucid free non-free | sudo tee -a /etc/apt/sources.list && wget -q http://packages.medibuntu.org/medibuntu-key.gpg -O- | sudo apt-key add - && sudo add-apt-repository ppa:ferramroberto/vlc && sudo apt-get update && sudo apt-get install -y --force-yes w32codecs non-free-codecs sun-java6-bin sun-java6-jre sun-java6-javadb sun-java6-jdk sun-java6-plugin sun-java6-fonts flashplugin-nonfree flashplugin-installer flashplugin-nonfree-extrasound ffmpeg vlc libdvdcss2 ubuntu-restricted-extras && sudo apt-get update >> "/dev/null" 2>&1
+zenity --info --title='uCodecsPack' \
+          --text="Η εγκατάσταση έχει ολοκληρωθεί." 
+fi
+if [ "$ANS" = "10.04/amd64" ]; then
+   echo "$PASS" | sudo -S -p "" echo deb http://packages.medibuntu.org/ lucid free non-free | sudo tee -a /etc/apt/sources.list && echo deb-src http://packages.medibuntu.org/ lucid free non-free | sudo tee -a /etc/apt/sources.list && wget -q http://packages.medibuntu.org/medibuntu-key.gpg -O- | sudo apt-key add - && sudo add-apt-repository ppa:ferramroberto/vlc && sudo apt-get update && sudo apt-get install -y --force-yes w64codecs non-free-codecs sun-java6-bin sun-java6-jre sun-java6-javadb sun-java6-jdk sun-java6-plugin sun-java6-fonts flashplugin-nonfree flashplugin-installer ffmpeg vlc libdvdcss2 ubuntu-restricted-extras && sudo apt-get update >> "/dev/null" 2>&1
+zenity --info --title='uCodecsPack' \
+          --text="Η εγκατάσταση έχει ολοκληρωθεί." 
+fi
+ if [ "$ANS" = "10.10/i386" ]; then
+   echo "$PASS" | sudo -S -p "" echo deb http://packages.medibuntu.org/ maverick free non-free | sudo tee -a /etc/apt/sources.list && echo deb-src http://packages.medibuntu.org/ maverick free non-free | sudo tee -a /etc/apt/sources.list && wget -q http://packages.medibuntu.org/medibuntu-key.gpg -O- | sudo apt-key add - && sudo add-apt-repository ppa:ferramroberto/vlc && sudo apt-get update && sudo apt-get install -y --force-yes w32codecs non-free-codecs sun-java6-bin sun-java6-jre sun-java6-javadb sun-java6-jdk sun-java6-plugin sun-java6-fonts flashplugin-nonfree flashplugin-installer flashplugin-nonfree-extrasound ffmpeg  vlc libdvdcss2 ubuntu-restricted-extras && sudo apt-get update >> "/dev/null" 2>&1
+zenity --info --title='uCodecsPack' \
+          --text="Η εγκατάσταση έχει ολοκληρωθεί." 
+fi
+if [ "$ANS" = "10.10/amd64" ]; then
+   echo "$PASS" | sudo -S -p "" echo deb http://packages.medibuntu.org/ maverick free non-free | sudo tee -a /etc/apt/sources.list && echo deb-src http://packages.medibuntu.org/ maverick free non-free | sudo tee -a /etc/apt/sources.list && wget -q http://packages.medibuntu.org/medibuntu-key.gpg -O- | sudo apt-key add - && sudo add-apt-repository ppa:ferramroberto/vlc && sudo apt-get update && sudo apt-get install -y --force-yes w64codecs non-free-codecs sun-java6-bin sun-java6-jre sun-java6-javadb sun-java6-jdk sun-java6-plugin sun-java6-fonts flashplugin-nonfree flashplugin-installer ffmpeg vlc libdvdcss2 ubuntu-restricted-extras && sudo apt-get update >> "/dev/null" 2>&1
+zenity --info --title='uCodecsPack' \
+          --text="Η εγκατάσταση έχει ολοκληρωθεί." 
+fi
+if [ "$ANS" = "11.04/i386" ]; then
+   echo "$PASS" | sudo -S -p "" echo deb http://packages.medibuntu.org/ natty free non-free | sudo tee -a /etc/apt/sources.list && echo deb-src http://packages.medibuntu.org/ natty free non-free | sudo tee -a /etc/apt/sources.list && wget -q http://packages.medibuntu.org/medibuntu-key.gpg -O- | sudo apt-key add - &&  sudo apt-get update && sudo apt-get install -y --force-yes w32codecs non-free-codecs sun-java6-bin sun-java6-jre sun-java6-javadb sun-java6-jdk sun-java6-plugin sun-java6-fonts flashplugin-nonfree flashplugin-installer ffmpeg vlc libdvdcss2 ubuntu-restricted-extras && sudo apt-get update >> "/dev/null" 2>&1
+zenity --info --title='uCodecsPack' \
+          --text="Η εγκατάσταση έχει ολοκληρωθεί." 
+fi
+if [ "$ANS" = "11.04/amd64" ]; then
+   echo "$PASS" | sudo -S -p "" echo deb http://packages.medibuntu.org/ natty free non-free | sudo tee -a /etc/apt/sources.list && echo deb-src http://packages.medibuntu.org/ natty free non-free | sudo tee -a /etc/apt/sources.list && wget -q http://packages.medibuntu.org/medibuntu-key.gpg -O- | sudo apt-key add - sudo add-apt-repository ppa:sevenmachines/flash &&  sudo apt-get update && sudo apt-get install -y --force-yes w64codecs non-free-codecs sun-java6-bin sun-java6-jre sun-java6-javadb sun-java6-jdk sun-java6-plugin sun-java6-fonts flashplugin64-installer ffmpeg vlc libdvdcss2 ubuntu-restricted-extras && sudo apt-get update >> "/dev/null" 2>&1
+zenity --info --title='uCodecsPack' \
+          --text="Η εγκατάσταση έχει ολοκληρωθεί." 
+fi
+exit 0
