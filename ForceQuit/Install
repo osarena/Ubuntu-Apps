@@ -1,0 +1,9 @@
+#!/bin/sh
+#Αuthor: Salih Emin contact @ osarena.net 
+#Based on the code by Josh Leverette
+#Lisence : GPL3 (http://www.gnu.org/licenses/gpl-3.0.html)
+
+zenity --info --title="ForceQuit" --text="Εκκίνηση εγκατάστασης του Force Quit, εισάγετε το συνθηματικό σας εάν ζητηθεί."
+gksudo cp ./Force\ Quit.desktop /usr/share/applications/ && gksudo cp ./forcekill.sh /usr/bin/ && nautilus /usr/share/applications
+zenity --info --title="ForceQuit" --text="Η εγκατάσταση έχει ολοκληρωθεί!\n\n\nΜόλις ανοίξει ο Nautilus επιλέξτε την συντόμευση με το όνομα 'Force Quit' και συρετε το στο αριστερό Launcher ως συντόμευση εφαρμογών."
+

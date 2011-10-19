@@ -1,0 +1,9 @@
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon=gnome-panel-force-quit
+Name=Force Quit
+Exec=forcekill.sh
+Comment=Allows you to kill a misbehaving application
